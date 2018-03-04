@@ -1,0 +1,208 @@
+
+
+html {
+ height: 100%;
+ 
+}
+body, html{
+     height: 100%;
+    //background-image: url(http://127.0.0.1:80/projeto/img/html.jpeg);
+    background-color:#F5FFFA;
+ 	background-repeat: no-repeat;
+    background-position: center center;
+	background-size: cover;
+ 	 background-attachment: fixed;
+ 	 -webkit-background-size:cover;
+	-moz-background-size:cover;
+ 	
+ 	font-family: 'Oxygen', sans-serif;
+
+}
+.img-responsive{
+ height:auto; 
+ width:100%
+}
+.main{
+ 	margin-top: 70px;
+ 	
+}
+
+h1.title {      
+	font-size: 50px;
+	font-family: 'Passion One', cursive; 
+	font-weight: 400; 
+	color: white;
+}
+
+hr{
+	width: 10%;
+	color: #fff;
+}
+
+.form-group{
+ 	margin-bottom: 15px;
+	color: #FFFFFF;
+}
+
+label{
+	margin-bottom: 15px;
+}
+
+input,
+input::-webkit-input-placeholder {
+    font-size: 11px;
+    padding-top: 3px;
+}
+
+.main-login{
+    background-color: #838B8B;
+    /* shadows and rounded borders */
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.2);
+    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+
+}
+
+.main-center{
+ 	margin-top: 30px;
+ 	margin: 0 auto;
+ 	max-width: 330px;
+    padding: 40px 40px;
+
+}
+
+.login-button{
+	margin-top: 10px;
+}
+
+.login-register{
+    
+	font-size: 12px;
+   
+	//text-align: center;
+}
+
+* {
+    margin:0;
+    padding:0;
+}
+
+body {
+    background:#EFEFEF url(bg.png);
+}
+
+.geral {
+    box-shadow:0 0 50px 0 rgba(0,0,0,0.4);
+    background: #FFF;
+    padding: 30px 60px;
+    width: 1000px;
+    margin: 0px auto;
+}
+
+header {
+    border-bottom:1px solid rgba(0,0,0,0.2);
+    padding-bottom:30px;
+}
+header:after, .geral:after, .chamadas:after {
+    content:" "; display:block; clear:both;} 
+
+header menu {float:right; padding:25px 0;}
+
+header menu li {display:inline; list-style:none;}
+
+header menu li a {
+    display:inline-block;
+    color:rgba(0,0,0,0.6);
+    text-decoration:none;
+    font-style:italic;
+    background:rgba(0,0,0,0.2);
+    padding: 10px 15px;
+}
+header menu li a:hover {color:#000; background:rgba(0,0,0,0.5);}
+
+article header {
+    padding-bottom:0;
+    margin-bottom:30px;
+    background-size:100%;
+    background:black url(img.jpg);
+}
+
+.logo {
+    float:left;
+    font-size:13px;
+    border:1px solid rgba(0,0,0,0.2);
+    width:200px;
+    text-align:center;
+    padding:30px 0;
+    font-weight:bold;
+    font-style:italic;
+}
+
+h1 {
+    font: italic 30    px georgia, times;
+    color: rgba(255, 255, 255, 0.9);
+    background: rgba(0, 0, 0, 0.7);
+    padding: 20px 35px;
+}
+
+h2  {
+    font: 20px/35px georgia, times;
+    padding: 0 40px 20px;
+    color: rgba(255, 255, 255, 0.9);
+    background: rgba(0, 0, 0, 0.7);
+}
+txt_link{
+    color: rgba(255, 255, 255, 0.9);
+    background: rgba(0, 0, 0, 0.7);
+}
+
+hr {
+    margin:30px 0;
+    display:block;
+    border:1px solid #CCC;
+    background:none;
+    height:1px;
+}
+
+p {
+    font:13px/28px georgia, times;
+    margin-bottom:20px;
+}
+
+.col {
+    padding: 30px 0;
+    max-width: 450px;
+    float: left;
+}
+
+.col + .col {float:right;}
+
+.col p:first-child {font-weight:bold; font-size:15px; font-style:italic;}
+
+img {max-width:100%;}
+
+.chamadas {padding:20px 0 30px;}
+.chamadas div {
+    width:170px;
+    padding:20px;
+    float:left;
+    margin-right:50px;
+    border:1px solid #CCC;
+}
+
+.chamadas div:last-child {margin-right:0;}
+
+footer {
+    clear:both;
+    border-top:1px solid #CCC;
+    font:bold italic 13px/28px georgia, times;
+    text-align:center;
+    padding:30px 0 0;
+    color: rgba(0, 0, 0, 0.9);
+
+}
+
+

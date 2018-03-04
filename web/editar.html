@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Cadastro</title>
+        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="bootstrap/css/style.css" rel="stylesheet">
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+                crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+                crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+                crossorigin="anonymous"></script>
+    </head>
+    <body>
+
+        <div class="geral">
+            <div class="card ">
+                <form id="formulario">
+
+                    <div class="row">
+                        <div class="form-group col-md-4">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <h3 class="page-header" >Cadastre-se</h3>
+                        </div>
+                        <div class="form-group col-md-4">    
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-4">
+                            <label>Nome :</label>
+                            <input class="form-control" name="nome" id="nome" required placeholder="Insira seu nome">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>CPF:</label>
+                            <input class="form-control" name="cpf" id="cpf" required placeholder="Insira seu CPF">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Telefone</label>
+                            <input class="form-control" name="telefone" id="telefone" required placeholder="Insira seu Telefone">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-4">
+                            <label>RG</label>
+                            <input class="form-control" name="rg" id="rg" required placeholder="Insira seu RG">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Pai:</label>
+                            <input class="form-control" name="nome_pai" id="nome_pai" required placeholder="Insira o nome"> 
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Mae:</label>
+                            <input class="form-control" name="nome_mae" id="nome_mae" required placeholder="Insira o nome">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-4">
+                            <label>Estado:</label>
+                            <select class="form-control" name="estado" id="estado" required>
+                                <option value="">Selecione</option>
+                            </select> 
+                        </div>
+                        <div class="form- group col-md4">
+                            <label>Municipio:</label>
+                            <select class="form-control" name="municipio" id="municipio" required>
+                                <option value="">Selecione</option>
+                            </select>
+                        </div>
+                        
+                        <div class="col-md-3">
+                            <label>Data:</label>
+                            <input class="form-control" name="data_nascimento" id="data_nascimento" type="text" name="dt" required>
+                        </div>
+                        
+                        
+                    </div> 
+                    
+                    <div class="row">
+                        <div class="form-group col-md-4">
+                             
+                        </div>
+                        <div class="form-group col-md-4">
+                            
+                        </div>
+                        <div class="col-md-3">
+                            
+
+                            <a href="http://localhost/desafio/web/index.html"> <button type="button" class="btn mt-2 btn-outline-dark"     id="delete">Voltar</button></a>
+                            <button type="submit" class="btn mt-2 btn-outline-dark">Alterar</button>
+                        </div>
+
+
+                    </div>   
+
+                </form>
+            </div>
+
+
+        </div>
+        <script>
+            
+            $(function () {
+
+                $(".estado").empty(); // zera o estado
+
+                // função jquery para pegar o valor get
+                $.urlParam = function (name) {
+                    var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+                    if (results == null) {
+                        return null;
+                    }
+                    else {
+                        return decodeURI(results[1]) || 0;
+                    }
+                }
+
+
+                // ao selecionar um  estado montar a lista de municipios
+                $("#estado").change(function () {
+                    $("#municipio").empty(); // limpa a lista de municipios
+                    $.ajax({
+                        type: "GET",
+                        url: "http://localhost:8080/municipios/estados/" + $(this).val(), // passa o id do estado
+                        dataType: 'json',
+                        async: false,
+                        success: function (response) {
+                            var option = '<option value="" >Selecione</option>'; // cria a string option padrão
+                            $.each(response, function (key, value) {
+                                option += '<option value="' + value.id + '">' + value.nome + '</option>'; // adiciona o option com os valores do municipio
+                            });
+                            $("#municipio").append(option);
+                        }
+
+                    });
+                });            
+
+
+                // monta a lista de estado
+                $.ajax({
+                    type: "GET",
+                    url: "http://localhost:8080/estados",
+                    dataType: 'json',
+                    async: false,
+                    success: function (response) {
+                        $.each(response, function (key, value) {
+                            var option = '<option value="' + value.id + '">' + value.nome + '</option>';
+                            $("#estado").append(option);
+                        });
+                    }
+
+                });
+
+
+                // submit do formulario
+                $("#formulario").submit(function (event) {
+
+                    $.ajax({
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        'type': 'PUT',
+                        'url': "http://localhost:8080/pessoas/" + $.urlParam('id'), // passo o id vindo do get
+                        'data': JSON.stringify(
+                            { // melhorar isso depois
+                                "nome": $("#nome").val(), 
+                                "cpf": $("#cpf").val(),
+                                "rg": $("#rg").val(),
+                                "telefone": $("#telefone").val(),
+                                "nome_mae": $("#nome_mae").val(),
+                                "nome_pai": $("#nome_pai").val(),
+                                "data_nascimento": $("#data_nascimento").val()
+                            }
+                        ),
+                        'dataType': 'json',
+                        success: function (response) { 
+                            alert("Alterado com sucesso!");
+                            window.location = "http://localhost/desafio/web";
+                        },
+                        error: function (err) {
+                            alert('Não foi possivel salvar');
+                            window.location = "http://localhost/desafio/web";
+                        }
+
+                    });
+
+                    event.preventDefault();
+                });
+
+
+                // carrega o registro de uma pessoa
+                $.ajax({
+                    type: "GET",
+                    url: "http://localhost:8080/pessoas/" + $.urlParam('id'), // passo o id vindo do get
+                    dataType: 'json',
+                    async: false,
+                    success: function (response) { // caso sucesso adiciono os valores para os campos
+
+                        $("#nome").val(response.nome);
+                        $("#cpf").val(response.cpf);
+                        $("#rg").val(response.rg);
+                        $("#telefone").val(response.telefone);
+                        $("#nome_mae").val(response.nome_mae);
+                        $("#nome_pai").val(response.nome_pai);
+                        $("#data_nascimento").val(response.data_nascimento);
+                    },
+                    error: function (err) { // caso n exista registro redireciono para a lista de pessoas
+                        window.location = "http://localhost/desafio/";
+                        alert('Registro não existe');
+                    }
+
+                });
+
+
+            });    
+        
+        </script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid.min.js"></script>
+
+    </body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Cadastro</title>
+        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="bootstrap/css/style.css" rel="stylesheet">
+
+        <script src="bootstrap/js/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"crossorigin="anonymous"></script>
+        <script src="bootstrap/js/bootstrap.min.js" ></script>
+        
+
+        
+    </head>
+    <body>
+
+        <div class="geral">
+            <div class="card ">
+               
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Nome</th>
+                            <th scope="col">CPF</th>
+                            <th scope="col">RG</th>
+                            <th scope="col">Mãe</th>
+                            <th scope="col">Pai</th>
+                            <th scope="col"><a href="cadastro.html"><button class="btn mt-2"  id="delete">Novo</button></a></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+                
+            </div>
+
+
+        </div>
+        <script>
+
+            //Chama a função via onclick e deleta o registro
+            function deletar(id) {
+                $.ajax({
+                    type: "DELETE",
+                    url: "http://localhost:8080/pessoas/" + id,
+                    dataType: 'json',
+                    async: false,
+                    success: function (response) {
+                        ini_table(); // renicia a tabela
+                    }
+
+                });
+            }
+
+
+            // cria a tabela
+            function ini_table() {
+
+                // limpa a tabela
+                $(".table > tbody").empty();
+
+                // chama o endpoint com a lista de pessoas
+                $.ajax({
+                    type: "GET",
+                    url: "http://localhost:8080/pessoas",
+                    dataType: 'json',
+                    async: false,
+                    success: function (response) {  // recebe uma lista de pessoas
+
+                        // ler a lista de pessoas e monta sua tabela
+                        $.each(response, function (key, value) {
+
+                            var newRow = $("<tr>"); // cria linha da tabela
+                            var cols = ""; 
+                            cols += '<td>' + value.id + '</td>'; // cria as coluna da tablea
+                            cols += '<td>' + value.nome + '</td>';
+                            cols += '<td>' + value.cpf + '</td>';
+                            cols += '<td>' + value.rg + '</td>';
+                            cols += '<td>' + value.nome_mae + '</td>';
+                            cols += '<td>' + value.nome_pai + '</td>';
+                            cols += '<td><button type="button" class="btn mt-2" onclick="deletar(' + value.id + ')">Deletar</button>'; // adiciona o botão para deletar usando o onclick
+                            cols += '<a href="editar.html?id=' + value.id + '"<button type="button" class="btn mt-2">Editar</button></td></a>'; // direciona para pagina de editar
+                            newRow.append(cols); //cria toda a linha e adiciona as colunas
+                            $(".table > tbody").append(newRow); //adiciona a linha para a tabela
+                        });
+                    },
+                    error: function (err) {
+                        alert('Não existe registro');
+                    }
+
+                });
+            }
+
+
+            $(function () { // inicia 
+                ini_table(); // chama o metodo para montar a lista
+            });
+
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid.min.js"></script>
+
+    </body>
+</html>

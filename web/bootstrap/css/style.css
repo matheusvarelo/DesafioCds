@@ -1,0 +1,18 @@
+*{margin:0; padding:0;}
+body {
+    background:#363636;
+    font-family:verdana, arial, tahoma, sans-serif;
+}
+.geral {
+    background:#363636;
+    padding:0;
+    border-radius:10px;
+    box-shadow:0 0 10px 8px rgba(0,0,0,0.3);
+    width:980px;
+    margin:20px auto;
+}
+
+.no-boxshadow .geral {
+    border:1px solid red;
+}
+
